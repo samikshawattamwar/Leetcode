@@ -1,0 +1,11 @@
+SELECT stock_name, SUM(oper) AS capital_gain_loss
+FROM 
+(
+    SELECT stock_name, operation,
+    CASE
+    WHEN operation ='buy' THEN -price
+    WHEN operation = 'sell' THEN price
+    END oper
+    FROM stocks
+) a
+GROUP BY stock_name
